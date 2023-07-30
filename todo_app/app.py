@@ -13,7 +13,7 @@ def index():
     return render_template('index.html', items=items)
 
 @app.route('/items/new', methods=['POST'])
-def add_item():
+def new_item():
     title = request.form.get('field_name')
     add_item(title)
     return redirect(url_for('index'))
