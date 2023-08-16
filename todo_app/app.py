@@ -6,7 +6,6 @@ from todo_app.data.session_items import get_items, add_item
 app = Flask(__name__)
 app.config.from_object(Config())
 
-@app.route('/items')
 @app.route('/')
 def index():
     items = get_items()
@@ -14,6 +13,6 @@ def index():
 
 @app.route('/items/new', methods=['POST'])
 def new_item():
-    title = request.form.get('field_name')
+    title = request.form.get('title_name')
     add_item(title)
     return redirect(url_for('index'))
