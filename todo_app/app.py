@@ -13,6 +13,6 @@ def index():
 
 @app.route('/items/new', methods=['POST'])
 def new_item():
-    title = request.form.get('title_name')
+    title = request.form.get('item_title')
     add_item(title)
     return redirect(url_for('index'))
