@@ -6,12 +6,20 @@
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
   </div>
-
+  <div>
+    <form action="{{url_for('new_item') }}" method="POST"> 
+      <label for"title">Enter item title:</label>
+      <input type="text" name="item_title" id="item_title">
+      <input type='submit' value="Submit">
+    </form>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+        {% for item in items %}
+          <li> {{item.title}} </li>
+          {% endfor %}
       </ul>
     </div>
   </div>
