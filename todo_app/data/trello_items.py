@@ -12,6 +12,12 @@ def get_items(board_id, trello_token, trello_key, list_names):
     """
     Fetches all saved items from the session.
 
+    Args:
+        board_id:
+        trello_token:
+        trello_key:
+        list_names:
+
     Returns:
         list: The list of saved items.
     """
@@ -55,18 +61,25 @@ def get_lists(board_id, trello_token, trello_key):
 #         item: The saved item.
 #     """
 #
-#
-# def add_item(title):
-#     """
-#     Adds a new item with the specified title to the session.
-#
-#     Args:
-#         title: The title of the item.
-#
-#     Returns:
-#         item: The saved item.
-#     """
-#
+
+def add_item(trello_token, trello_key, list_id, title):
+    """
+    Adds a new item with the specified title to the session.
+
+    Args:
+        title: The title of the item.
+
+    Returns:
+        item: The saved item.
+    """
+    requests.post(f"https://api.trello.com/1/cards?idList={list_id}&key={trello_key}&token={trello_token}&name={title}")
+
+
+def get_list_id(list_names, status):
+    for key, value in list_names.items():
+        if value == status:
+            return key
+
 #
 # def save_item(item):
 #     """

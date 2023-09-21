@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 from todo_app.flask_config import Config
 # from todo_app.data.session_items import get_items, add_item
-from todo_app.data.trello_items import get_items, get_lists
+from todo_app.data.trello_items import get_items, get_lists, add_item,get_list_id
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -18,8 +18,10 @@ def index():
     items = get_items(board_id, trello_token, trello_key, list_names)
     return render_template('index.html', items=items)
 
-# @app.route('/items/new', methods=['POST'])
-# def new_item():
-#     title = request.form.get('item_title')
-#     add_item(title)
-#     return redirect(url_for('index'))
+@app.route('/items/new', methods=['POST'])
+def new_item():
+    title = request.form.get('item_title')
+    status = request.form.get('status')
+    list_id = get_list_id(list_names, status)
+    add_item(trello_token, trello_key, list_id, title)
+    return redirect(url_for('index'))
