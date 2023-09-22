@@ -34,6 +34,21 @@
             <td> {{item.title}} </td>
             <td> {{item.status}}</td>
             <td> {{item.id}}</td>
+            <td>
+              <form action={{url_for('move_to_to_do', item_id=item.id)}} method="POST">
+              <button type="move_to_to_do">Move to To Do</button>
+              </form>
+            </td>
+            <td>
+              <form action={{url_for('move_to_in_progress', item_id=item.id)}} method="POST">
+              <button type="move_to_in_progress">Move to In Progress</button>
+              </form>
+            </td>
+            <td>
+              <form action={{url_for('move_to_done', item_id=item.id)}} method="POST">
+              <button type="move_to_done">Move to Done</button>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </table>

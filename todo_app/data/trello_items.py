@@ -1,7 +1,5 @@
 import requests
 
-_DEFAULT_ITEMS = []
-
 
 # board_id = os.getenv(TRELLO_BOARD_ID)
 # trello_token = os.getenv(TRELLO_TOKEN)
@@ -29,16 +27,14 @@ def get_items(board_id, trello_token, trello_key, list_names):
 
 
 def _select_fields(data, list_names):
+    items = []
     for record in data:
         id = record['id']
-        vals = [list['id'] for list in _DEFAULT_ITEMS]
-        if id not in vals:
-            title = record['name']
-            list_id = record["idList"]
-            status = list_names[list_id]
-            new_item = {"id": id, "status": status, "title": title}
-            _DEFAULT_ITEMS.append(new_item)
-    return _DEFAULT_ITEMS.copy()
+        list_id = record["idList"]
+        status = list_names[list_id]
+        new_item = {"id": id, "status": status, "title": record['name']}
+        items.append(new_item)
+    return items
 
 
 def get_lists(board_id, trello_token, trello_key):
@@ -50,18 +46,8 @@ def get_lists(board_id, trello_token, trello_key):
     return list_names
 
 
-# def get_item(id):
-#     """
-#     Adds a new item with the specified title to the session.
-#
-#     Args:
-#         title: The title of the item.
-#
-#     Returns:
-#         item: The saved item.
-#     """
-#
-
+def change_status(item_id, trello_token, trello_key, list_id):
+    requests.request("PUT", f"https://api.trello.com/1/cards/{item_id}?key={trello_key}&token={trello_token}&idList={list_id}")
 def add_item(trello_token, trello_key, list_id, title):
     """
     Adds a new item with the specified title to the session.
