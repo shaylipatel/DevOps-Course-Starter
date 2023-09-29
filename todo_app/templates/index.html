@@ -7,9 +7,15 @@
     <p class="lead">Just another to-do app.</p>
   </div>
   <div>
-    <form action="{{url_for('new_item') }}" method="POST"> 
+    <form action="{{url_for('new_item') }}" method="POST">
       <label for"title">Enter item title:</label>
       <input type="text" name="item_title" id="item_title">
+      <label for"status">Status:</label>
+      <select id="status" name="status">
+        <option value="To Do">To Do</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+      </select>
       <input type='submit' value="Submit">
     </form>
   </div>
@@ -17,9 +23,35 @@
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        {% for item in items %}
-          <li> {{item.title}} </li>
+        <table>
+          <tr>
+            <td>Item</td>
+            <td>Status</td>
+            <td>Item ID</td>
+          </tr>
+          <tr>
+            {% for item in items %}
+            <td> {{item.name}} </td>
+            <td> {{item.status}}</td>
+            <td> {{item.id}}</td>
+            <td>
+              <form action={{url_for('move_to_to_do', item_id=item.id)}} method="POST">
+              <button type="move_to_to_do">Move to To Do</button>
+              </form>
+            </td>
+            <td>
+              <form action={{url_for('move_to_in_progress', item_id=item.id)}} method="POST">
+              <button type="move_to_in_progress">Move to In Progress</button>
+              </form>
+            </td>
+            <td>
+              <form action={{url_for('move_to_done', item_id=item.id)}} method="POST">
+              <button type="move_to_done">Move to Done</button>
+              </form>
+            </td>
+          </tr>
           {% endfor %}
+        </table>
       </ul>
     </div>
   </div>
