@@ -30,7 +30,7 @@
             <td>Item ID</td>
           </tr>
           <tr>
-            {% for item in items %}
+            {% for item in view_model.items %}
             <td> {{item.name}} </td>
             <td> {{item.status}}</td>
             <td> {{item.id}}</td>
