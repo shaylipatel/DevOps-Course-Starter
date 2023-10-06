@@ -12,7 +12,28 @@ trello = Trello()
 def index():
     items = trello.get_items()
     item_view_model = ViewModel(items)
-    return render_template('index.html', view_model=item_view_model)
+    return render_template('index.html', view_model=item_view_model.items)
+
+
+@app.route('/to_do')
+def to_do_view():
+    items = trello.get_items()
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model=item_view_model.to_do_items)
+
+
+@app.route('/in_progress')
+def in_progress_view():
+    items = trello.get_items()
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model=item_view_model.in_progress_items)
+
+
+@app.route('/done')
+def done_view():
+    items = trello.get_items()
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model=item_view_model.done_items)
 
 
 @app.route('/items/new', methods=['POST'])
