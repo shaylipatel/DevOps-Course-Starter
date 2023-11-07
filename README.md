@@ -72,6 +72,15 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+## Running the tests
+In order to run the tests, run the following in the terminal.
+```bash
+$ poetry run pytest
+```
+
+Ensure that the test files have a name of the format of test_*.py or *_test.py.
+'*' refers to the original name of the file you want to test.
+You can store the test file alongside the file you want to test.
 
 
 
