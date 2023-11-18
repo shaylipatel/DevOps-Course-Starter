@@ -25,3 +25,8 @@
         dest: /opt/todoapp
         version: exercise-4
       become: yes
+    - name: Install project dependencies
+      ansible.builtin.command:
+        chdir: /opt/todoapp
+        cmd: /home/ec2-user/.local/bin/poetry install
+      become: yes
