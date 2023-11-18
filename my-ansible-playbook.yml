@@ -19,3 +19,9 @@
         path: /opt/todoapp
         state: directory
       become: yes
+    - name: Get the latest version of your code with Git
+      ansible.builtin.git:
+        repo: 'https://github.com/shaylipatel/DevOps-Course-Starter.git'
+        dest: /opt/todoapp
+        version: exercise-4
+      become: yes
