@@ -15,5 +15,7 @@
       ansible.builtin.shell:
         cmd: curl -sSL https://install.python-poetry.org | python3 -
     - name: Create directory for the To-Do App code
-      ansible.builtin.command: mkdir /opt/todoapp
+      ansible.builtin.file:
+        path: /opt/todoapp
+        state: directory
       become: yes
