@@ -10,3 +10,7 @@
         packages:
         - git
         - python3
+      become: yes
+    - name: Install poetry
+      ansible.builtin.shell:
+        cmd: curl -sSL https://install.python-poetry.org | python3 -
