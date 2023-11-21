@@ -1,6 +1,13 @@
 - name: Install To-Do App on new web servers
   hosts: webservers
   remote_user: ec2-user
+  vars_prompt:
+    - name: trello_key  
+      prompt: Enter the trello key
+      private: true
+    - name: trello_token
+      prompt: Enter the trello token
+      private: true
 
   tasks:
     - name: Install packages
@@ -30,3 +37,9 @@
         chdir: /opt/todoapp
         cmd: /home/ec2-user/.local/bin/poetry install
       become: yes
+    - name: Create a .env file on the host
+      ansible.builtin.template:
+        src: /home/ec2-user/.env.j2
+        dest: /opt/todoapp/.env
+      become: yes
+   
