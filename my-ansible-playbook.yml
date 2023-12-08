@@ -47,4 +47,11 @@
         src: /home/ec2-user/todoapp.service
         dest: /etc/systemd/system/todoapp.service
       become: yes
+    - name: todoapp
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: true
+      become: yes
+
+
    
