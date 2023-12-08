@@ -42,4 +42,9 @@
         src: /home/ec2-user/.env.j2
         dest: /opt/todoapp/.env
       become: yes
+    - name: Copy todoapp.service file to managed hosts
+      ansible.builtin.copy:
+        src: /home/ec2-user/todoapp.service
+        dest: /etc/systemd/system/todoapp.service
+      become: yes
    
