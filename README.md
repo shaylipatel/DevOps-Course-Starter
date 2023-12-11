@@ -82,5 +82,46 @@ Ensure that the test files have a name of the format of test_*.py or *_test.py.
 '*' refers to the original name of the file you want to test.
 You can store the test file alongside the file you want to test.
 
+## Provisioning VM's
+### SSH into Control Node and check Ansible installation
+SSH into the Control Node using a command in the below format.
+```bash
+$ ssh USERNAME@IP-ADDRESS
+```
+
+Check that Ansible is installed by connecting to the control node and running the command 
+```bash
+$ ansible --version
+```
+If this prints out some info including a version number, then Ansible is installed. 
+Don’t worry if it says messages that include “[DEPRECATION WARNING]” etc.
+
+If Ansible isn’t installed, then install it with 
+```bash
+$ sudo pip install ansible
+```
+This might take a minute to run and might show a warning/error message at the end.
+Even if it does, run ansible --version to check if installation succeeded.
+
+### Set up SSH between your Control and Managed Nodes
+On the Control Node, create an SSH key pair with the ssh-keygen command line tool. 
+This will generate the key pair in an .ssh directory in the home directory.
+```bash
+$ ssh-keygen
+```
+
+Copy the public key to the Managed nodes by running this command.
+```bash
+$ ssh-copy-id ec2-user@managed-host-ip
+```
 
 
+### Run the Ansible Playbook
+In order to provision a VM from an Ansible Control Node, ensure the host names for the Managed Control Nodes are listed 
+in the my-ansible-inventory.ini file.
+On the Ansible Control Node, run the following command to run it in the interactive mode.
+
+```bash
+$ ansible-playbook my-ansible-playbook.yml -i my-ansible-playbook.ini
+```
+When prompted, enter the TRELLO_KEY and TRELLO_TOKEN.
