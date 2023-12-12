@@ -122,6 +122,6 @@ in the my-ansible-inventory.ini file.
 On the Ansible Control Node, run the following command to run it in the interactive mode.
 
 ```bash
-$ ansible-playbook my-ansible-playbook.yml -i my-ansible-playbook.ini
+$ ansible-playbook my-ansible-playbook.yml -i my-ansible-inventory.ini
 ```
 When prompted, enter the TRELLO_KEY and TRELLO_TOKEN.
