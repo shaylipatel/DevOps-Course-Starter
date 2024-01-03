@@ -1,0 +1,6 @@
+.env
+.git
+.vscode
+.venv
+my-ansible-inventory.ini
+my-ansible-playbook.yml
