@@ -148,7 +148,7 @@ $ docker build --target production --tag todo-app:prod .
 
 You can then start the dev container by running:
 ```bash
-$ docker run --env-file ./.env -p 5100:80 --mount "type=bind,source=$(pwd)/todo_app,target=/app/todo_app" todo-app:dev
+$ docker run --env-file ./.env -p 5100:5000 --mount "type=bind,source=$(pwd)/todo_app,target=/todo_app/todo_app" todo-app:dev
 ```
 
 or you can start the prod container by running:
