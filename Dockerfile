@@ -1,6 +1,5 @@
 FROM python:3.12-rc-alpine as base
-RUN apk update
-RUN apk add curl
+RUN apk update && apk add curl
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="${PATH}:/root/.local/bin"
 WORKDIR /todo_app
