@@ -125,3 +125,33 @@ On the Ansible Control Node, run the following command to run it in the interact
 $ ansible-playbook my-ansible-playbook.yml -i my-ansible-inventory.ini
 ```
 When prompted, enter the TRELLO_KEY and TRELLO_TOKEN.
+
+## Docker
+ You'll need to install Docker Desktop (https://www.docker.com/products/docker-desktop).
+
+#### Running the Dev & Prod Containers
+
+The development container has two key behaviours:
+* Enables Flask's debugging/developer mode to provide detailed logging and feedback.
+* Allows rapid changes to code files without having to rebuild the image each time.
+
+The difference between the dev and prod containers is that the prod container uses Gunicorn to run the app, whereas the dev container uses Flask.
+
+You can create either a development or production image from the same Dockerfile, by running the following for dev:
+```bash
+$ docker build --target development --tag todo-app:dev .
+```
+or the following for prod:
+```bash
+$ docker build --target production --tag todo-app:prod .
+```
+
+You can then start the dev container by running:
+```bash
+$ docker run --env-file ./.env -p 5100:5000 --mount "type=bind,source=$(pwd)/todo_app,target=/todo_app/todo_app" todo-app:dev
+```
+
+or you can start the prod container by running:
+```bash
+$ docker run --env-file .env -p 5000:5000 todo-app:prod
+```
